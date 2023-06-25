@@ -5,9 +5,18 @@ using BlogManagement.BlogManagement.infrastructure.BlogManagement.Infrastructure
 using BlogManagement.Infrastructure.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Serilog;
+using Serilog.Sinks.SystemConsole.Themes;
 using ServiceHost;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
+builder.Host.UseSerilog((builder, configuration) => configuration
+    .WriteTo.Console(theme: AnsiConsoleTheme.Code)
+    .Enrich.FromLogContext()
+    .ReadFrom.Configuration(builder.Configuration)
+);
 
 // Add services to the container.
 

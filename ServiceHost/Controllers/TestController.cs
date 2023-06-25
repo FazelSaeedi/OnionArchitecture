@@ -41,9 +41,9 @@ namespace ServiceHost.Controllers
         public ServiceResult<string> GetAvengers2()
         {
 
-            throw new Exception("Wrong");
+            // throw new Exception("Wrong");
             // var T = articleApplication.Create(new CreateArticle(){  });
-            // return ServiceResult.Create<string>("OK");
+            throw ServiceResult.Create<string>("OK").ToException();
             // return ServiceResult.Empty.SetError("ok" , 400 ).To<string>();
 
         }

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
+using _0_Framework.Application;
 
 namespace MH.DDD.Core.Types
 {
@@ -48,7 +49,9 @@ namespace MH.DDD.Core.Types
         }
 
 
-
+        public AppException ToException()
+        =>  new AppException(this);
+        
         public Task<ServiceResult> ToAsync()
         => Task.FromResult(this);
 

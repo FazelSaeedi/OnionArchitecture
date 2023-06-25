@@ -1,4 +1,5 @@
 using System.Net;
+using _0_Framework.Application;
 using MH.DDD.Core.Types;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -37,6 +38,20 @@ namespace ServiceHost
             try
             {
                 await _next(context);
+            }
+            catch(AppException exp) 
+            { 
+                 _logger.LogCritical(exp, "refId {ReferenceId} happend in {AppName} application",
+                    srError.ReferenceId,
+                    Program.Name);
+                // srError.Error = exp.serviceResult.Error ;
+                // srError.Message = exp.serviceResult.Message;
+                srError.Error = new AppError
+                {
+                    Code = 500,
+                    Message = exp.serviceResult.Message
+                };
+                expHappend = appErrorHappend = true ;
             }
             catch (System.Exception exp)
             {
