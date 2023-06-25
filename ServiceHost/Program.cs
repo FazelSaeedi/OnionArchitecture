@@ -46,6 +46,9 @@ if (app.Environment.IsDevelopment())
 
 
 app.UseHttpsRedirection();
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
+
 app.UseStaticFiles();
 
 app.UseRouting();
@@ -71,5 +74,8 @@ app.Run();
 
 public partial class Program
 {
+
+    public static string Name = "Base_Service_Host" ; 
+
 
 }

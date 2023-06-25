@@ -31,9 +31,20 @@ namespace ServiceHost.Controllers
         [HttpGet("create")]
         public ServiceResult<string> GetAvengers()
         {
-            var T = articleApplication.Create(new CreateArticle(){  });
+            // var T = articleApplication.Create(new CreateArticle(){  });
             return ServiceResult.Create<string>("OK");
-            return ServiceResult.Empty.SetError("ok" , 400 ).To<string>();
+            // return ServiceResult.Empty.SetError("ok" , 400 ).To<string>();
+
+        }
+
+        [HttpGet("create2")]
+        public ServiceResult<string> GetAvengers2()
+        {
+
+            throw new Exception("Wrong");
+            // var T = articleApplication.Create(new CreateArticle(){  });
+            // return ServiceResult.Create<string>("OK");
+            // return ServiceResult.Empty.SetError("ok" , 400 ).To<string>();
 
         }
 
