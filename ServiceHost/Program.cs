@@ -27,7 +27,19 @@ var connectionString = builder.Configuration.GetConnectionString("Base_Connectio
 BlogManagementBootstrapper.Configure(builder.Services, connectionString);
 
 
-
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "MyAllowSpecificOrigins",
+        builder =>
+        {
+            // builder.WithOrigins("http://localhost:4200")
+            builder
+            .SetIsOriginAllowed(x => true)
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowAnyOrigin();
+        });
+});
 
 
 builder.Services.AddSingleton(HtmlEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Arabic));
