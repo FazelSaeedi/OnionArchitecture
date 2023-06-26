@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using _0_Framework.Application.ZarinPal;
 using BlogManagement.Application.Contracts.Article;
 using MH.DDD.Core.Types;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +13,7 @@ namespace ServiceHost.Controllers
 {
      [ApiController]
     [Route("api/[controller]")]
-    public class TestController: ControllerBase
+    public class TestController: BaseController
     {
         private static readonly string[] Summaries = new[]
         {
@@ -22,9 +23,8 @@ namespace ServiceHost.Controllers
         private readonly ILogger<TestController> _logger;
         private  IArticleApplication articleApplication;
 
-        public TestController(ILogger<TestController> logger, IArticleApplication articleApplication)
+        public TestController(ILogger<TestController> logger, IArticleApplication articleApplication) : base( logger )
         {
-            _logger = logger;
             this.articleApplication = articleApplication;
         }
 
