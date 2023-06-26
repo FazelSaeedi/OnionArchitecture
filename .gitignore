@@ -395,3 +395,6 @@ FodyWeavers.xsd
 # Local History for Visual Studio Code
 .history/
 .env
+
+#Paket dependency manager
+paket-files/

@@ -83,11 +83,11 @@ app.UseEndpoints(endpoints =>
 
 
 
-using (var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())
-{
-    var context = serviceScope.ServiceProvider.GetService<BlogContext>();
-    context.Database.Migrate();
-}
+// using (var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())
+// {
+//     var context = serviceScope.ServiceProvider.GetService<BlogContext>();
+//     context.Database.Migrate();
+// }
 
 app.Run();
 
