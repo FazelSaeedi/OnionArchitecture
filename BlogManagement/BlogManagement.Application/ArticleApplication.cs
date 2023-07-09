@@ -26,15 +26,15 @@ namespace BlogManagement.Application
             if (_articleRepository.Exists(x => x.Title == command.Title))
                 return operation.Failed(ApplicationMessages.DuplicatedRecord);
 
-            var slug = command.Slug.Slugify();
-            var categorySlug = _articleCategoryRepository.GetSlugBy(command.CategoryId);
-            var path = $"{categorySlug}/{slug}";
-            var pictureName = _fileUploader.Upload(command.Picture, path);
-            var publishDate = command.PublishDate.ToGeorgianDateTime();
+            // var slug = command.Slug.Slugify();
+            // var categorySlug = _articleCategoryRepository.GetSlugBy(command.CategoryId);
+            // var path = $"{categorySlug}/{slug}";
+            // var pictureName = _fileUploader.Upload(command.Picture, path);
+            // var publishDate = command.PublishDate.ToGeorgianDateTime();
 
-            var article = new Article(command.Title, command.ShortDescription, command.Description, pictureName,
-                command.PictureAlt, command.PictureTitle, publishDate, slug, command.Keywords, command.MetaDescription,
-                command.CanonicalAddress, command.CategoryId);
+            var article = new Article("command.Title", "command.ShortDescription", "command.Description", "pictureName",
+                "command.PictureAlt", "command.PictureTitle", DateTime.Now, "slug", "command.Keywords", "command.MetaDescription",
+                "command.CanonicalAddress", Guid.NewGuid().ToString());
 
             _articleRepository.Create(article);
             _articleRepository.SaveChanges();
@@ -65,7 +65,7 @@ namespace BlogManagement.Application
             return operation.Succedded();
         }
 
-        public EditArticle GetDetails(long id)
+        public EditArticle GetDetails(string id)
         {
             return _articleRepository.GetDetails(id);
         }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BlogManagement.Infrastructure.EFCore.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class addcreateat : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,8 +15,7 @@ namespace BlogManagement.Infrastructure.EFCore.Migrations
                 name: "ArticleCategories",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     Picture = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     PictureAlt = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
@@ -27,7 +26,10 @@ namespace BlogManagement.Infrastructure.EFCore.Migrations
                     Keywords = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     MetaDescription = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
                     CanonicalAddress = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
-                    CreateionDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    IsVisibled = table.Column<bool>(type: "bit", nullable: false),
+                    CreateAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifyAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -38,8 +40,7 @@ namespace BlogManagement.Infrastructure.EFCore.Migrations
                 name: "Articles",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     ShortDescription = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -51,8 +52,11 @@ namespace BlogManagement.Infrastructure.EFCore.Migrations
                     Keywords = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     MetaDescription = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
                     CanonicalAddress = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
-                    CategoryId = table.Column<long>(type: "bigint", nullable: false),
-                    CreateionDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    CategoryId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    IsVisibled = table.Column<bool>(type: "bit", nullable: false),
+                    CreateAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifyAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {

@@ -1,7 +1,9 @@
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
 using _0_Framework.Application;
+using _0_Framework.Infrastructure;
 using BlogManagement.BlogManagement.infrastructure.BlogManagement.Infrastructure.EFCore;
+using BlogManagement.Domain.ArticleAgg;
 using BlogManagement.Infrastructure.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -47,6 +49,9 @@ builder.Services.AddSingleton<IPasswordHasher, PasswordHasher>();
 builder.Services.AddTransient<IFileUploader, FileUploader>();
 // builder.Services.AddTransient<IAuthHelper, AuthHelper>();
 
+// builder.Services.AddScoped(typeof(IMongoRepository<>), MongoRepository<Article>);
+
+
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "webapitest", Version = "v1" });
@@ -83,11 +88,11 @@ app.UseEndpoints(endpoints =>
 
 
 
-// using (var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())
-// {
-//     var context = serviceScope.ServiceProvider.GetService<BlogContext>();
-//     context.Database.Migrate();
-// }
+using (var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())
+{
+    var context = serviceScope.ServiceProvider.GetService<BlogEfCoreContext>();
+    context.Database.Migrate();
+}
 
 app.Run();
 

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace BlogManagement.Domain.ArticleCategoryAgg
 {
-    public class ArticleCategory : EntityBase<long>
+    public class ArticleCategory : EntityBase<string>
     {
         public string Name { get; private set; } //
         public string Picture { get; private set; } //

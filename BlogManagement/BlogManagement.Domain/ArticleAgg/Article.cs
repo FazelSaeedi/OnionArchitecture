@@ -5,7 +5,7 @@ using System;
 
 namespace BlogManagement.Domain.ArticleAgg
 {
-    public class Article : EntityBase<long>
+    public class Article : EntityBase<string>
     {
         public string Title { get; private set; }
         public string ShortDescription { get; private set; }
@@ -18,13 +18,14 @@ namespace BlogManagement.Domain.ArticleAgg
         public string Keywords { get; private set; }
         public string MetaDescription { get; private set; }
         public string CanonicalAddress { get; private set; }
-        public long CategoryId { get; private set; }
+        public string CategoryId { get; private set; }
         public ArticleCategory Category { get; private set; }
 
         public Article(string title, string shortDescription, string description,
             string picture, string pictureAlt, string pictureTitle, DateTime publishDate, string slug,
-            string keywords, string metaDescription, string canonicalAddress, long categoryId)
+            string keywords, string metaDescription, string canonicalAddress, string categoryId)
         {
+            Id = Guid.NewGuid().ToString();
             Title = title;
             ShortDescription = shortDescription;
             Description = description;
@@ -41,7 +42,7 @@ namespace BlogManagement.Domain.ArticleAgg
 
         public void Edit(string title, string shortDescription, string description,
             string picture, string pictureAlt, string pictureTitle, DateTime publishDate, string slug,
-            string keywords, string metaDescription, string canonicalAddress, long categoryId)
+            string keywords, string metaDescription, string canonicalAddress, string categoryId)
         {
             Title = title;
             ShortDescription = shortDescription;

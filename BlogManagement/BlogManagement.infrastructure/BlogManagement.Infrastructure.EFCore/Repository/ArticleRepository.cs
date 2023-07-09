@@ -10,16 +10,16 @@ using System.Linq;
 
 namespace BlogManagement.Infrastructure.EFCore.Repository
 {
-    public class ArticleRepository : RepositoryBase<long, Article>, IArticleRepository
+    public class ArticleRepository : EfCoreRepositoryBase<string, Article>, IArticleRepository
     {
-        private readonly BlogContext _context;
+        private readonly BlogEfCoreContext _context;
 
-        public ArticleRepository(BlogContext context) : base(context)
+        public ArticleRepository(BlogEfCoreContext context) : base(context)
         {
             _context = context;
         }
 
-        public EditArticle GetDetails(long id)
+        public EditArticle GetDetails(string id)
         {
             return _context.Articles.Select(x => new EditArticle
             {
@@ -38,7 +38,7 @@ namespace BlogManagement.Infrastructure.EFCore.Repository
             }).FirstOrDefault(x => x.Id == id);
         }
 
-        public Article GetWithCategory(long id)
+        public Article GetWithCategory(string id)
         {
             return _context.Articles.Include(x => x.Category).FirstOrDefault(x => x.Id == id);
         }
@@ -59,8 +59,8 @@ namespace BlogManagement.Infrastructure.EFCore.Repository
             if (!string.IsNullOrWhiteSpace(searchModel.Title))
                 query = query.Where(x => x.Title.Contains(searchModel.Title));
 
-            if (searchModel.CategoryId > 0)
-                query = query.Where(x => x.CategoryId == searchModel.CategoryId);
+            // if (searchModel.CategoryId > 0)
+                // query = query.Where(x => x.CategoryId == searchModel.CategoryId);
 
             return query.OrderByDescending(x => x.Id).ToList();
         }

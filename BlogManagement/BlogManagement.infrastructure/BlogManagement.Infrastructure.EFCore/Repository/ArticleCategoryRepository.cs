@@ -11,11 +11,11 @@ using ArticleCategory = BlogManagement.Domain.ArticleCategoryAgg.ArticleCategory
 
 namespace BlogManagement.Infrastructure.EFCore.Repository
 {
-    public class ArticleCategoryRepository : RepositoryBase<long, ArticleCategory>, IArticleCategoryRepository
+    public class ArticleCategoryRepository : EfCoreRepositoryBase<string, ArticleCategory>, IArticleCategoryRepository
     {
-        private readonly BlogContext _context;
+        private readonly BlogEfCoreContext _context;
 
-        public ArticleCategoryRepository(BlogContext context) : base(context)
+        public ArticleCategoryRepository(BlogEfCoreContext context) : base(context)
         {
             _context = context;
         }
@@ -29,7 +29,7 @@ namespace BlogManagement.Infrastructure.EFCore.Repository
             }).ToList();
         }
 
-        public EditArticleCategory GetDetails(long id)
+        public EditArticleCategory GetDetails(string id)
         {
             return _context.ArticleCategories.Select(x => new EditArticleCategory
             {
@@ -46,7 +46,7 @@ namespace BlogManagement.Infrastructure.EFCore.Repository
             }).FirstOrDefault(x => x.Id == id);
         }
 
-        public string GetSlugBy(long id)
+        public string GetSlugBy(string id)
         {
             return _context.ArticleCategories.Select(x => new { x.Id, x.Slug })
                 .FirstOrDefault(x => x.Id == id).Slug;
@@ -63,7 +63,7 @@ namespace BlogManagement.Infrastructure.EFCore.Repository
                     Name = x.Name,
                     Picture = x.Picture,
                     ShowOrder = x.ShowOrder,
-                    CreationDate = x.CreateionDate.ToFarsi(),
+                    CreationDate = x.CreateAt.ToFarsi(),
                     ArticlesCount = x.Articles.Count
                 });
 

@@ -9,12 +9,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace _0_Framework.Infrastructure
 {
-    public class RepositoryBase<Tkey , T> : IRepository<Tkey , T> where T : class
+    public class EfCoreRepositoryBase<Tkey , T> : IRepository<Tkey , T> where T : class
     {
         private readonly DbContext _context;
         private DbSet<IEntityBase> _dbSet;
 
-        public RepositoryBase(DbContext context)
+        public EfCoreRepositoryBase(DbContext context)
         {
             _context = context;
             _dbSet = _context.Set<IEntityBase>();

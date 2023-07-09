@@ -11,13 +11,13 @@ namespace BlogManagement.BlogManagement.infrastructure.BlogManagement.Infrastruc
 {
 
 
-     public class BlogContext : DbContext
+     public class BlogEfCoreContext : DbContext
     {
         
         public DbSet<Article> Articles { get; set; }
         public DbSet<ArticleCategory> ArticleCategories { get; set; }
 
-        public BlogContext(DbContextOptions  options)
+        public BlogEfCoreContext(DbContextOptions  options)
             : base(options)
         {
         }

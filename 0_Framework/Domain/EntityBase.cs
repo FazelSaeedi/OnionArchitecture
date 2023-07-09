@@ -6,19 +6,49 @@ using System.Threading.Tasks;
 
 namespace _0_Framework.Domain
 {
-    public interface IEntityBase
+    
+    public interface IEntityBase { object GetId(); }
+
+ public abstract class EntityBase : IEntityBase
     {
+
+        public bool IsDeleted { get; protected set; }
+        public bool IsVisibled { get; protected set; }
+        public DateTime CreateAt { get; protected set; }
+        public DateTime ModifyAt { get; protected set; }
+        public object _Id { get; protected set; }
+
+
+        public object GetId()
+        {
+            return _Id;
+        }
 
     }
-    public class EntityBase<T> : IEntityBase
+
+     public abstract class EntityBase<TKey> : EntityBase where TKey : IEquatable<TKey>
     {
-        public T Id { get; set;  }
-
-        public DateTime CreateionDate { get; set; }
-
-        public EntityBase()
+        protected Guid _identifiableId;
+        protected object Actual => this;
+        protected TKey _id;
+        public virtual TKey Id
         {
-            CreateionDate = DateTime.Now;
+            get { return (TKey)base._Id; }
+            protected set
+            {
+                base._Id = _id = value;
+                string gu ;
+                if (value is string _idString)
+                {
+                    if (!this.IsValid(_idString))
+                        _identifiableId = Guid.Empty;
+                    else
+                        _identifiableId = Guid.Parse(_idString);
+                }
+            }
         }
+
+
+        public bool IsValid(string _id) => Guid.TryParse(_id + string.Empty, out var guid);
     }
 }

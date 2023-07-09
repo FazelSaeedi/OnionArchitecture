@@ -4,10 +4,10 @@ using System.Collections.Generic;
 
 namespace BlogManagement.Domain.ArticleAgg
 {
-    public interface IArticleRepository : IRepository<long, Article>
+    public interface IArticleRepository : IRepository<string, Article>
     {
-        EditArticle GetDetails(long id);
-        Article GetWithCategory(long id);
+        EditArticle GetDetails(string id);
+        Article GetWithCategory(string id);
         List<ArticleViewModel> Search(ArticleSearchModel searchModel);
     }
 }

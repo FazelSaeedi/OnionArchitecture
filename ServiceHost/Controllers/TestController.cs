@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using _0_Framework.Application.ZarinPal;
+using _0_Framework.Infrastructure;
 using BlogManagement.Application.Contracts.Article;
+using BlogManagement.Domain.ArticleAgg;
 using MH.DDD.Core.Types;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MongoDB.Bson.Serialization;
+using MongoDB.Driver;
 using Newtonsoft.Json;
 
 namespace ServiceHost.Controllers
@@ -23,18 +27,31 @@ namespace ServiceHost.Controllers
         private readonly ILogger<TestController> _logger;
         private  IArticleApplication articleApplication;
 
-        public TestController(ILogger<TestController> logger, IArticleApplication articleApplication) : base( logger )
+        public TestController(ILogger<TestController> logger, IArticleApplication articleApplication) : base(logger)
         {
             this.articleApplication = articleApplication;
         }
 
         [HttpGet("create")]
-        public ServiceResult<string> GetAvengers()
+        public async Task<ServiceResult<string>> GetAvengers()
         {
-            // var T = articleApplication.Create(new CreateArticle(){  });
+
+            
+            BsonClassMap.RegisterClassMap<Article>(cm =>
+                {
+                cm.AutoMap();
+                cm.UnmapMember(m => m.Category);
+            });
+            MongoClient client = new MongoClient("mongodb://admin:pass123@localhost:27017/?authSource=admin");
+            IMongoDatabase database = client.GetDatabase("ExampleDatabase");
+            var _playlistCollection = database.GetCollection<Article>("Article");
+
+            _playlistCollection.InsertOne(new Article("ok" , "ok" , "ok" , "ok" , "aa" , "ss" , DateTime.Now , "ss" , "qweqwe" , "asdsa" , "asdasd" , Guid.NewGuid().ToString()));
+            // var users = await _context.Articles.ToListAsync();
+            // _context.Articles.InsertOneAsync(new Article("ok" , "ok" , "ok" , "ok" , "aa" , "ss" , DateTime.Now , "ss" , "qweqwe" , "asdsa" , "asdasd" , 22));
+            var T = articleApplication.Create(new CreateArticle(){  });
             return ServiceResult.Create<string>("OK");
             // return ServiceResult.Empty.SetError("ok" , 400 ).To<string>();
-
         }
 
         [HttpGet("create2")]

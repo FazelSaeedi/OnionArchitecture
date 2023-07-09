@@ -17,6 +17,7 @@ namespace BlogManagement.Infrastructure.EFCore.Mappings
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Title).HasMaxLength(500);
+            builder.Ignore(x => x._Id);
             builder.Property(x => x.ShortDescription).HasMaxLength(1000);
             builder.Property(x => x.Picture).HasMaxLength(500);
             builder.Property(x => x.PictureAlt).HasMaxLength(500);

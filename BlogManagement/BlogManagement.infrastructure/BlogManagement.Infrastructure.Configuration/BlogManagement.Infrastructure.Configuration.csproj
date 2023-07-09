@@ -5,6 +5,7 @@
     <ProjectReference Include="..\..\BlogManagement.Application\BlogManagement.Application.csproj" />
     <ProjectReference Include="..\..\BlogManagement.Application.Contract\BlogManagement.Application.Contract.csproj" />
     <ProjectReference Include="..\BlogManagement.Infrastructure.EFCore\BlogManagement.Infrastructure.EFCore.csproj" />
+    <ProjectReference Include="..\BlogManagement.Infrastructure.MongoDb\BlogManagement.Infrastructure.MongoDb.csproj" />
   </ItemGroup>
 
   <ItemGroup>

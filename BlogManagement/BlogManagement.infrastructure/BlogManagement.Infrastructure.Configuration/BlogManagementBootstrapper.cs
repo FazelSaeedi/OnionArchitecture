@@ -1,5 +1,6 @@
 
 
+using _0_Framework.Infrastructure;
 using BlogManagement.Application;
 using BlogManagement.Application.Contracts.Article;
 using BlogManagement.Application.Contracts.ArticleCategory;
@@ -9,6 +10,7 @@ using BlogManagement.Domain.ArticleCategoryAgg;
 using BlogManagement.Infrastructure.EFCore.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using ParkBee.MongoDb.DependencyInjection;
 
 namespace BlogManagement.Infrastructure.Configuration
 {
@@ -25,7 +27,8 @@ namespace BlogManagement.Infrastructure.Configuration
             // services.AddTransient<IArticleQuery, ArticleQuery>();
             // services.AddTransient<IArticleCategoryQuery, ArticleCategoryQuery>();
 
-            services.AddDbContext<BlogContext>(x => x.UseSqlServer(connectionString));
+            services.AddDbContext<BlogEfCoreContext>(x => x.UseSqlServer(connectionString));
+
 
 
 

@@ -59,7 +59,7 @@ namespace BlogManagement.Application
             return _articleCategoryRepository.GetArticleCategories();
         }
 
-        public EditArticleCategory GetDetails(long id)
+        public EditArticleCategory GetDetails(string id)
         {
             return _articleCategoryRepository.GetDetails(id);
         }

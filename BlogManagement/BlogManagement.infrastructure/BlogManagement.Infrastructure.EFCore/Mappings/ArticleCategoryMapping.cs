@@ -10,7 +10,7 @@ namespace BlogManagement.Infrastructure.EFCore.Mappings
         {
             builder.ToTable("ArticleCategories");
             builder.HasKey(x => x.Id);
-
+            builder.Ignore(x => x._Id);
             builder.Property(x => x.Name).HasMaxLength(500);
             builder.Property(x => x.Description).HasMaxLength(2000);
             builder.Property(x => x.Picture).HasMaxLength(500);
