@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace _0_Framework.Domain
 {
@@ -16,6 +18,7 @@ namespace _0_Framework.Domain
         public bool IsVisibled { get; protected set; }
         public DateTime CreateAt { get; protected set; }
         public DateTime ModifyAt { get; protected set; }
+        
         public object _Id { get; protected set; }
 
 
@@ -31,6 +34,7 @@ namespace _0_Framework.Domain
         protected Guid _identifiableId;
         protected object Actual => this;
         protected TKey _id;
+        
         public virtual TKey Id
         {
             get { return (TKey)base._Id; }

@@ -1,5 +1,6 @@
 ﻿using _0_Framework.Domain;
 using BlogManagement.Domain.ArticleAgg;
+using MongoDB.Bson;
 using System.Collections.Generic;
 
 namespace BlogManagement.Domain.ArticleCategoryAgg
@@ -22,6 +23,7 @@ namespace BlogManagement.Domain.ArticleCategoryAgg
             string description, int showOrder, string slug, string keywords, string metaDescription,
             string canonicalAddress)
         {
+            Id = ObjectId.GenerateNewId().ToString();
             Name = name;
             Picture = picture;
             PictureAlt = pictureAlt;

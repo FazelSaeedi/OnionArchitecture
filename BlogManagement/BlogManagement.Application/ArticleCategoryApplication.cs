@@ -19,13 +19,13 @@ namespace BlogManagement.Application
         public OperationResult Create(CreateArticleCategory command)
         {
             var operation = new OperationResult();
-            if (_articleCategoryRepository.Exists(x => x.Name == command.Name))
-                return operation.Failed(ApplicationMessages.DuplicatedRecord);
+            // if (_articleCategoryRepository.Exists(x => x.Name == command.Name))
+            //     return operation.Failed(ApplicationMessages.DuplicatedRecord);
 
-            var slug = command.Slug.Slugify();
-            var pictureName = _fileUploader.Upload(command.Picture, slug);
-            var articleCategory = new ArticleCategory(command.Name, pictureName, command.PictureAlt, command.PictureTitle
-                , command.Description, command.ShowOrder, slug, command.Keywords, command.MetaDescription,
+            // var slug = command.Slug.Slugify();
+            // var pictureName = _fileUploader.Upload(command.Picture, slug);
+            var articleCategory = new ArticleCategory(command.Name, "pictureName", command.PictureAlt, command.PictureTitle
+                , command.Description, command.ShowOrder, "slug", command.Keywords, command.MetaDescription,
                 command.CanonicalAddress);
 
             _articleCategoryRepository.Create(articleCategory);

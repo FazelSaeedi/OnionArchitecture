@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using _0_Framework.Domain;
 using Microsoft.EntityFrameworkCore;
+using MongoDB.Driver;
 
 namespace _0_Framework.Infrastructure
 {
@@ -46,6 +47,55 @@ namespace _0_Framework.Infrastructure
         public void SaveChanges()
         {
             _context.SaveChanges();
+        }
+    }
+ 
+    public interface IMongoDbContext
+    {
+        public IMongoCollection<IEntityBase> GetCollection<IEntityBase>();
+
+    }
+
+   public class MongoRepositoryBase<Tkey, T> : IRepository<Tkey, T> where T : class
+    {
+        private readonly IMongoDbContext _context;
+
+        public IMongoCollection<T> _mongoCollection ;
+
+        public MongoRepositoryBase(IMongoDbContext context)
+        {
+            _context = context;
+            _mongoCollection = context.GetCollection<T>();
+        }
+
+        public void Create(T entity)
+        {
+            _mongoCollection.InsertOne(entity);
+        }
+
+        public bool Exists(Expression<Func<T, bool>> expression)
+        {
+            return _mongoCollection.AsQueryable().Any(expression);
+        }
+
+        public T Get(Tkey id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<T> Get()
+        {
+            throw new NotImplementedException();
+        }
+
+        public DbSet<IEntityBase> GetAsQueryAble()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SaveChanges()
+        {
+            
         }
     }
 }
