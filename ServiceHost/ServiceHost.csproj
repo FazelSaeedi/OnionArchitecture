@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BlogManagement\BlogManagement.infrastructure\BlogManagement.Infrastructure.Configuration\BlogManagement.Infrastructure.Configuration.csproj" />
+    <ProjectReference Include="..\TaskManagement\TaskManagement.Infrastructure\TaskManagement.Infrastructure.Configuration\TaskManagement.Infrastructure.Configuration.csproj" />
   </ItemGroup>
 
 

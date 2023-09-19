@@ -17,8 +17,12 @@ namespace BlogManagement.BlogManagement.infrastructure.BlogManagement.Infrastruc
         public DbSet<Article> Articles { get; set; }
         public DbSet<ArticleCategory> ArticleCategories { get; set; }
 
-        public BlogContext(DbContextOptions  options)
+        public BlogContext(DbContextOptions<BlogContext> options)
             : base(options)
+        {
+        }
+
+        private BlogContext()
         {
         }
 

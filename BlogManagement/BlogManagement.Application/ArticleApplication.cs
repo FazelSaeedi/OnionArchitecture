@@ -2,6 +2,7 @@
 using BlogManagement.Application.Contracts.Article;
 using BlogManagement.Domain.ArticleAgg;
 using BlogManagement.Domain.ArticleCategoryAgg;
+using MediatR;
 using System;
 using System.Collections.Generic;
 
@@ -12,12 +13,14 @@ namespace BlogManagement.Application
         private readonly IFileUploader _fileUploader;
         private readonly IArticleRepository _articleRepository;
         private readonly IArticleCategoryRepository _articleCategoryRepository;
+        private IMediator _mediator;
         public ArticleApplication(IArticleRepository articleRepository, IFileUploader fileUploader,
-            IArticleCategoryRepository articleCategoryRepository)
+            IArticleCategoryRepository articleCategoryRepository, IMediator mediator)
         {
             _fileUploader = fileUploader;
             _articleRepository = articleRepository;
             _articleCategoryRepository = articleCategoryRepository;
+            _mediator = mediator;
         }
 
         public OperationResult Create(CreateArticle command)
@@ -73,6 +76,12 @@ namespace BlogManagement.Application
         public List<ArticleViewModel> Search(ArticleSearchModel searchModel)
         {
             return _articleRepository.Search(searchModel);
+        }
+
+        public async Task<string> Test()
+        {
+            var pong = await _mediator.Send(new Ping { Message = "Ping" });
+            return " " ;
         }
     }
 }

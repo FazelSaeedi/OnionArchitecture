@@ -12,13 +12,17 @@ namespace _0_Framework.Domain
     }
     public class EntityBase<T> : IEntityBase
     {
+        
         public T Id { get; set;  }
+        public DateTime CreatedAt { get; set; }
+        public DateTime ModifyAt { get; set; }
+        public bool IsDeleted  { get; set; }
+        public bool IsVisibled { get; set; }
 
-        public DateTime CreateionDate { get; set; }
 
         public EntityBase()
         {
-            CreateionDate = DateTime.Now;
+            CreatedAt = DateTime.Now;
         }
     }
 }

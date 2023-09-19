@@ -9,5 +9,6 @@ namespace BlogManagement.Application.Contracts.Article
         OperationResult Edit(EditArticle command);
         EditArticle GetDetails(long id);
         List<ArticleViewModel> Search(ArticleSearchModel searchModel);
+        Task<string> Test();
     }
 }
